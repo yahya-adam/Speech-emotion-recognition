@@ -47,8 +47,7 @@ SER_Project/
 
 ```bash
 pip install -r requirements.txt
-```
-**requirements.txt example:**
+
 librosa==0.10.1
 numpy==1.24.3
 pandas==2.0.3
@@ -58,10 +57,10 @@ transformers==4.35.0
 scikit-learn==1.3.0
 tqdm==4.66.1
 openpyxl==3.1.2
-
+```
 ## Dataset
 Flat structure (files with emotion codes in filename):
-1031_IEO_DIS_MD.wav, etc.
+- 1031_IEO_DIS_MD.wav, etc.
 
 ## Feature Extraction (Hybrid Model)
 
@@ -78,40 +77,40 @@ For the hybrid model, we extract MFCC features:
 ## Training the Hybrid Model
 
 The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:
-Parameter	   Value
-Conv filters	39
-Kernel size	    2
-Dilation size	8
-BiLSTM units	128
-Dropout	        0.1
-Batch size	    64
-Learning rate	0.001
-Epochs	        500
+- Parameter	   Value
+- Conv filters	39
+- Kernel size	    2
+- Dilation size	8
+- BiLSTM units	128
+- Dropout	        0.1
+- Batch size	    64
+- Learning rate	0.001
+- Epochs	        500
 
 ## Training wav2vec2
 
 We use the pretrained model facebook/wav2vec2-base from Hugging Face and fine‑tune it for emotion classification.
 
 ## Preparation
-    Raw audio (variable length) is used – wav2vec2 expects waveform tensors.
-    The dataset is split into train/validation (80/20) per fold (or use the same 10‑fold splits for fair comparison).
+-   Raw audio (variable length) is used – wav2vec2 expects waveform tensors.
+-   The dataset is split into train/validation (80/20) per fold (or use the same 10‑fold splits for fair comparison).
 
 Key hyperparameters:
-Parameter	         Value
-Pretrained model	facebook/wav2vec2-base
-Learning rate	    2e-5
-Batch size	        16
-Epochs	            30
-Weight decay	    0.01
-Warmup steps	    500
+- Parameter	         Value
+- Pretrained model	facebook/wav2vec2-base
+- Learning rate	    2e-5
+- Batch size	        16
+- Epochs	            30
+- Weight decay	    0.01
+- Warmup steps	    500
 
 The script outputs:
 
-    Fine‑tuned model weights.
+-   Fine‑tuned model weights.
 
-    Validation accuracy and loss curves.
+-   Validation accuracy and loss curves.
 
-    Classification report
+-    Classification report
 
 ## Evaluation
 
@@ -124,17 +123,17 @@ Both models are evaluated on the same test folds (or a held‑out test set). Met
    **Macro AUC (one‑vs‑rest)**
 
 ## Results
-Model	                Accuracy	Macro F1	Macro AUC
-Hybrid CNN‑BiLSTM	       54.09%	None	    0.85
-wav2vec2 (fine‑tuned)	   70.96%	0.70	    0.90
+- Model	                Accuracy	Macro F1	Macro AUC
+- Hybrid CNN‑BiLSTM	       54.09%	None	    0.85
+- wav2vec2 (fine‑tuned)	   70.96%	0.70	    0.90
 
 ##### Observations:
 
-    wav2vec2 outperforms the hybrid model by ~6% in accuracy, especially in distinguishing positive vs. negative valence (“valence gap”).
+ -   wav2vec2 outperforms the hybrid model by ~6% in accuracy, especially in distinguishing positive vs. negative valence (“valence gap”).
 
-    The hybrid model is much smaller (≈5M parameters) and can run on edge devices.
+  -  The hybrid model is much smaller (≈5M parameters) and can run on edge devices.
 
-    Common confusions: fear ↔ surprise, disgust ↔ anger.
+  -  Common confusions: fear ↔ surprise, disgust ↔ anger.
 
 ## Use Cases
 
