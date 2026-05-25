@@ -11,6 +11,7 @@ Both models are trained and evaluated on a **6‑emotion dataset** (Angry, Disgu
 
 ## Table of Contents
 - [Project Structure](#project-structure)
+- [Architecture](#architecture)
 - [Installation](#installation)
 - [Dataset](#dataset)
 - [Feature Extraction (Hybrid Model)](#feature-extraction-hybrid-model)
@@ -38,7 +39,8 @@ SER_Project/
 └── requirements.txt
 
 ---
-
+## Architecture
+![Architecture](./images/architecture-hybrid-wav2vec2.png)
 ## Installation
 
 1. **Clone the repository** (or copy the scripts).
@@ -77,7 +79,6 @@ For the hybrid model, we extract MFCC features:
 ## Training the Hybrid Model
 
 The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:
-- Parameter	      | Value
 - Conv filters  ==	 39
 - Kernel size   ==   2
 - Dilation size ==   8
@@ -96,7 +97,6 @@ We use the pretrained model facebook/wav2vec2-base from Hugging Face and fine‑
 -   The dataset is split into train/validation (80/20) per fold (or use the same 10‑fold splits for fair comparison).
 
 Key hyperparameters:
-- Parameter	       | Value
 - Pretrained model == facebook/wav2vec2-base
 - Learning rate	   ==   2e-5
 - Batch size	   ==    16
@@ -123,10 +123,7 @@ Both models are evaluated on the same test folds (or a held‑out test set). Met
    **Macro AUC (one‑vs‑rest)**
 
 ## Results
-- Model	                Accuracy	Macro F1	Macro AUC
-- Hybrid CNN‑BiLSTM	       54.09%	None	    0.85
-- wav2vec2 (fine‑tuned)	   70.96%	0.70	    0.90
-
+![Results](./images/Results.png)
 ##### Observations:
 
  -   wav2vec2 outperforms the hybrid model by ~6% in accuracy, especially in distinguishing positive vs. negative valence (“valence gap”).
