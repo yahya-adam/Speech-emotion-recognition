@@ -47,7 +47,8 @@ SER_Project/
 
 ```bash
 pip install -r requirements.txt
-requirements.txt example:
+```
+**requirements.txt example:**
 librosa==0.10.1
 numpy==1.24.3
 pandas==2.0.3
@@ -58,55 +59,51 @@ scikit-learn==1.3.0
 tqdm==4.66.1
 openpyxl==3.1.2
 
-Dataset
+## Dataset
 Flat structure (files with emotion codes in filename):
 1031_IEO_DIS_MD.wav, etc.
 
-Feature Extraction (Hybrid Model)
+## Feature Extraction (Hybrid Model)
 
 For the hybrid model, we extract MFCC features:
 
-    Number of coefficients: 40
+   **Number of coefficients:**  39
 
-    Window length: 25 ms
+   **Window length:** 25 ms
 
-    Hop length: 10 ms
+   **Hop length:** 10 ms
 
-    Fixed audio length: 200 samples (~2 seconds at 16kHz) – pad or truncate.
+   **Fixed audio length:** 200 samples (~2 seconds at 16kHz) – pad or truncate.
 
+## Training the Hybrid Model
 
-Training the Hybrid Model
+The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:
+Parameter	   Value
+Conv filters	39
+Kernel size	    2
+Dilation size	8
+BiLSTM units	128
+Dropout	        0.1
+Batch size	    64
+Learning rate	0.001
+Epochs	        500
 
-The hybrid model is a CNN‑BiLSTM (or the TIMNET variant). Key hyperparameters:
-Parameter	      Value
-Conv filters	   40
-Kernel size	       3
-BiLSTM units      128
-Dropout	          0.3
-Batch size	      32
-Learning rate     1e-3
-Epochs	          70
-weight_decay      1e-4
-
-Training wav2vec2
+## Training wav2vec2
 
 We use the pretrained model facebook/wav2vec2-base from Hugging Face and fine‑tune it for emotion classification.
-Preparation
 
+## Preparation
     Raw audio (variable length) is used – wav2vec2 expects waveform tensors.
-
     The dataset is split into train/validation (80/20) per fold (or use the same 10‑fold splits for fair comparison).
 
-
 Key hyperparameters:
-Parameter	Value
+Parameter	         Value
 Pretrained model	facebook/wav2vec2-base
-Learning rate	2e-5
-Batch size	   8
-Epochs	       10
-Weight decay  0.01
-Warmup steps   500                    
-
+Learning rate	    2e-5
+Batch size	        16
+Epochs	            30
+Weight decay	    0.01
+Warmup steps	    500
 
 The script outputs:
 
@@ -114,26 +111,24 @@ The script outputs:
 
     Validation accuracy and loss curves.
 
-    Classification report and confusion matrix.
+    Classification report
 
-Evaluation
+## Evaluation
 
 Both models are evaluated on the same test folds (or a held‑out test set). Metrics:
 
-    Accuracy
+   **Accuracy**
 
-    Macro F1‑score
+   **Macro F1‑score**
 
-    Macro AUC (one‑vs‑rest)
+   **Macro AUC (one‑vs‑rest)**
 
-    Confusion matrix (to see which emotions are confused)
+## Results
+Model	                Accuracy	Macro F1	Macro AUC
+Hybrid CNN‑BiLSTM	       54.09%	None	    0.85
+wav2vec2 (fine‑tuned)	   70.96%	0.70	    0.90
 
-Results
-Model	              Accuracy	   Macro F1	   Macro AUC
-Hybrid CNN‑BiLSTM	    54.09%	     None	      0.85
-wav2vec2 (fine‑tuned)	70.96%	     0.70	      0.90
-
-Observations:
+##### Observations:
 
     wav2vec2 outperforms the hybrid model by ~6% in accuracy, especially in distinguishing positive vs. negative valence (“valence gap”).
 
@@ -141,34 +136,35 @@ Observations:
 
     Common confusions: fear ↔ surprise, disgust ↔ anger.
 
-Use Cases
+## Use Cases
 
-    Mental health monitoring: Detect signs of depression or anxiety from speech diaries (with user consent).
+   **Mental health monitoring:** Detect signs of depression or anxiety from speech diaries (with user consent).
 
-    Automotive safety: Identify driver stress/anger and adjust cabin environment.
+   **Automotive safety:** Identify driver stress/anger and adjust cabin environment.
 
-    Empathetic virtual assistants: Escalate frustrated customers to human agents.
+   **Empathetic virtual assistants:** Escalate frustrated customers to human agents.
 
-    Educational technology: Measure student engagement and confusion during online lessons.
+   **Educational technology:** Measure student engagement and confusion during online lessons.
 
-Limitations & Future Work
-Limitations
+## Limitations & Future Work
+#### Limitations
 
-    Emotion subjectivity: Labels may be ambiguous; ground truth is not absolute.
+   **Emotion subjectivity**: Labels may be ambiguous; ground truth is not absolute.
 
-    Cross‑corpus degradation: Performance drops on unseen speakers or languages.
+   **Cross‑corpus degradation:** Performance drops on unseen speakers or languages.
 
-    Computational cost: wav2vec2 requires a GPU for fine‑tuning and inference.
+   **Computational cost:** wav2vec2 requires a GPU for fine‑tuning and inference.
 
-    Privacy concerns: Emotion recognition can be misused for surveillance.
+   **Privacy concerns:** Emotion recognition can be misused for surveillance.
 
-Future improvements
+#### Future improvements
 
-    Multimodal fusion (audio + text + facial expressions).
+   **Multimodal fusion** (audio + text + facial expressions).
 
-    Cross‑lingual adaptation using self‑supervised models.
+   **Cross‑lingual adaptation** using self‑supervised models.
 
-    Fairness evaluation across age, gender, and accent groups.
+   **Fairness evaluation** across age, gender, and accent groups.
 
-    On‑device deployment with quantisation and pruning.
+   **On‑device deployment** with quantisation and pruning.#
 
+   
