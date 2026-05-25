@@ -77,15 +77,15 @@ For the hybrid model, we extract MFCC features:
 ## Training the Hybrid Model
 
 The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:
-- Parameter	   Value
-- Conv filters	39
-- Kernel size	    2
-- Dilation size	8
-- BiLSTM units	128
-- Dropout	        0.1
-- Batch size	    64
+- Parameter	      Value
+- Conv filters	  39
+- Kernel size	   2
+- Dilation size	   8
+- BiLSTM units	  128
+- Dropout	      0.1
+- Batch size	  64
 - Learning rate	0.001
-- Epochs	        500
+- Epochs	      500
 
 ## Training wav2vec2
 
@@ -96,13 +96,13 @@ We use the pretrained model facebook/wav2vec2-base from Hugging Face and fine‑
 -   The dataset is split into train/validation (80/20) per fold (or use the same 10‑fold splits for fair comparison).
 
 Key hyperparameters:
-- Parameter	         Value
-- Pretrained model	facebook/wav2vec2-base
-- Learning rate	    2e-5
-- Batch size	        16
-- Epochs	            30
-- Weight decay	    0.01
-- Warmup steps	    500
+- Parameter	       - Value
+- Pretrained model == facebook/wav2vec2-base
+- Learning rate	   ==   2e-5
+- Batch size	   ==    16
+- Epochs	       ==    30
+- Weight decay	   ==    0.01
+- Warmup steps	   ==    500
 
 The script outputs:
 
