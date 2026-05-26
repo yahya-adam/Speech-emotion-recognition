@@ -126,7 +126,7 @@ Both models are evaluated on the same test folds (or a held‑out test set). Met
 ![Results](./images/Results.png)
 ##### Observations:
 
- -   wav2vec2 outperforms the hybrid model by ~6% in accuracy, especially in distinguishing positive vs. negative valence (“valence gap”).
+ -   wav2vec2 outperforms the hybrid model by ~16% in accuracy, especially in distinguishing positive vs. negative valence (“valence gap”).
 
   -  The hybrid model is much smaller (≈5M parameters) and can run on edge devices.
 
