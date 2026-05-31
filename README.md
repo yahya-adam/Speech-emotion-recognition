@@ -46,7 +46,7 @@ SER_Project/
 1. **Clone the repository** (or copy the scripts).
 2. **Create a virtual environment** (Python 3.8+ recommended).
 3. **Install dependencies**:
-4. **Create requirement.txt file and copy these below libraries**
+4. **Create requirements.txt file and copy these below libraries**
 
 - librosa==0.10.1
 - numpy==1.24.3
