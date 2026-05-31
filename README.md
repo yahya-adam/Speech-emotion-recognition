@@ -48,17 +48,19 @@ SER_Project/
 3. **Install dependencies**:
 4. **Create requirement.txt file and copy these below libraries**
 
-librosa==0.10.1
-numpy==1.24.3
-pandas==2.0.3
-tensorflow==2.15.0
-torch==2.1.0
-transformers==4.35.0
-scikit-learn==1.3.0
-tqdm==4.66.1
-openpyxl==3.1.2
+- librosa==0.10.1
+- numpy==1.24.3
+- pandas==2.0.3
+- tensorflow==2.15.0
+- torch==2.1.0
+- transformers==4.35.0
+- scikit-learn==1.3.0
+- tqdm==4.66.1
+- openpyxl==3.1.2
 
+```bash
 pip install -r requirements.txt
+```
 
 ## Dataset
 Flat structure (files with emotion codes in filename):
