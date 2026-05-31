@@ -46,9 +46,7 @@ SER_Project/
 1. **Clone the repository** (or copy the scripts).
 2. **Create a virtual environment** (Python 3.8+ recommended).
 3. **Install dependencies**:
-
-```bash
-pip install -r requirements.txt
+4. **Create requirement.txt file and copy these below libraries**
 
 librosa==0.10.1
 numpy==1.24.3
@@ -59,7 +57,9 @@ transformers==4.35.0
 scikit-learn==1.3.0
 tqdm==4.66.1
 openpyxl==3.1.2
-```
+
+pip install -r requirements.txt
+
 ## Dataset
 Flat structure (files with emotion codes in filename):
 - 1031_IEO_DIS_MD.wav, etc.
@@ -80,13 +80,13 @@ For the hybrid model, we extract MFCC features:
 
 The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:
 - Conv filters  ==	 39
-- Kernel size   ==   2
-- Dilation size ==   8
-- BiLSTM units  ==  128
-- Dropout	    ==  0.1
+- Kernel size   ==   3
+- BiLSTM units  ==  384
+- Dropout	    ==  0.3
 - Batch size    ==  64
-- Learning rate == 0.001
-- Epochs	    ==  500
+- weight_decay = 1e-4   
+- Learning rate == 1e-3
+- Epochs	    ==  70
 
 ## Training wav2vec2
 
@@ -99,10 +99,15 @@ We use the pretrained model facebook/wav2vec2-base from Hugging Face and fine‑
 Key hyperparameters:
 - Pretrained model == facebook/wav2vec2-base
 - Learning rate	   ==   2e-5
-- Batch size	   ==    16
-- Epochs	       ==    30
+- Batch size	   ==    8
+- Epochs	       ==    10
 - Weight decay	   ==    0.01
 - Warmup steps	   ==    500
+- max_grad_norm = 1.0        
+- early_stopping_patience = 4 
+- warmup_ratio = 0.2
+- gradient_accumulation_steps = 2
+
 
 The script outputs:
 
