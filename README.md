@@ -26,21 +26,22 @@ Both models are trained and evaluated on a **6‑emotion dataset** (Angry, Disgu
 
 ## Project Structure
 SER_Project/
-├── hybrid_model/
-│ ├── train_hybrid.py # Training script for CNN‑BiLSTM
-│ └── utils.py # Feature extraction, data loading
-│
-├── wav2vec2_model/
-│ ├── train_wav2vec2.py # Fine‑tuning script for wav2vec2
-│ └── config.yaml # Hyperparameters
-│
-├── results/ # Saved models, logs, Excel reports
-├── README.md
-└── requirements.txt
+- ├── hybrid_model/
+- │ ├── train_hybrid.py # Training script for CNN‑BiLSTM
+- │ └── utils.py # Feature extraction, data loading
+- │
+- ├── wav2vec2_model/
+- │ ├── train_wav2vec2.py # Fine‑tuning script for wav2vec2
+- │ └── config.yaml # Hyperparameters
+- │
+- ├── results/ # Saved models, logs, Excel reports
+- ├── README.md
+- └── requirements.txt
 
 ---
 ## Architecture
 ![Architecture](./images/architecture-hybrid-wav2vec2.png)
+
 ## Installation
 
 1. **Clone the repository** (or copy the scripts).
