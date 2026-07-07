@@ -51,14 +51,14 @@ SER_Project/
 3. **Install dependencies**:
 4. **Create requirements.txt file and copy these below libraries**
 ```text
-librosa==0.10.1\
-numpy==1.24.3\
-pandas==2.0.3\
-tensorflow==2.15.0\
-torch==2.1.0\
-transformers==4.35.0\
-scikit-learn==1.3.0\
-tqdm==4.66.1\
+librosa==0.10.1
+numpy==1.24.3
+pandas==2.0.3
+tensorflow==2.15.0
+torch==2.1.0
+transformers==4.35.0
+scikit-learn==1.3.0
+tqdm==4.66.1
 openpyxl==3.1.2
 ```
 ```bash
@@ -80,7 +80,7 @@ For the hybrid model, we extract MFCC features:
 
 ## Training the Hybrid Model
 
-The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:
+The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:  
  Conv filters  ==	 39\
  Kernel size   ==   3\
  BiLSTM units  ==  384\
@@ -121,51 +121,39 @@ The script outputs:
 
 ## Evaluation
 
-Both models are evaluated on the same test folds (or a held‑out test set). Metrics:
-
-   **Accuracy**
-
-   **Macro F1‑score**
-
+Both models are evaluated on the same test folds (or a held‑out test set). Metrics:  
+   **Accuracy**  
+   **Macro F1‑score**  
    **Macro AUC (one‑vs‑rest)**
 
 ## Results
 ![Results](./images/Results.png)
-##### Observations:
+
+#### Observations:
 
  -   wav2vec2 outperforms the hybrid model by ~16% in accuracy, especially in distinguishing positive vs. negative valence (“valence gap”).
-
-  -  The hybrid model is much smaller (≈5M parameters) and can run on edge devices.
-
-  -  Common confusions: fear ↔ surprise, disgust ↔ anger.
+ -   hybrid model is much smaller (≈5M parameters) and can run on edge devices.
+ -   Common confusions: fear ↔ surprise, disgust ↔ anger.
 
 ## Use Cases
 
-   **Mental health monitoring:** Detect signs of depression or anxiety from speech diaries (with user consent).
-
-   **Automotive safety:** Identify driver stress/anger and adjust cabin environment.
-
-   **Empathetic virtual assistants:** Escalate frustrated customers to human agents.
-
+   **Mental health monitoring:** Detect signs of depression or anxiety from speech diaries (with user consent).  
+   **Automotive safety:** Identify driver stress/anger and adjust cabin environment.  
+   **Empathetic virtual assistants:** Escalate frustrated customers to human agents.  
    **Educational technology:** Measure student engagement and confusion during online lessons.
 
 ## Limitations & Future Work
-#### Limitations
+### Limitations
 
-   **Emotion subjectivity**: Labels may be ambiguous; ground truth is not absolute.
-
-   **Cross‑corpus degradation:** Performance drops on unseen speakers or languages.
-
-   **Computational cost:** wav2vec2 requires a GPU for fine‑tuning and inference.
-
+   **Emotion subjectivity**: Labels may be ambiguous; ground truth is not absolute.\
+   **Cross‑corpus degradation:** Performance drops on unseen speakers or languages.\
+   **Computational cost:** wav2vec2 requires a GPU for fine‑tuning and inference.\
    **Privacy concerns:** Emotion recognition can be misused for surveillance.
 
 #### Future improvements
 
-   **Multimodal fusion** (audio + text + facial expressions).
-
-   **Cross‑lingual adaptation** using self‑supervised models.
-
+   **Multimodal fusion** (audio + text + facial expressions).\
+   **Cross‑lingual adaptation** using self‑supervised models.\
    **Fairness evaluation** across age, gender, and accent groups.
 
    **On‑device deployment** with quantisation and pruning.#
