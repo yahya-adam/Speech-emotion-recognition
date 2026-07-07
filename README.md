@@ -113,8 +113,8 @@ Key hyperparameters:
 
 The script outputs:
 
--   Fine‑tuned model weights.\
--   Validation accuracy and loss curves.\
+-   Fine‑tuned model weights.
+-   Validation accuracy and loss curves.
 -   Classification report
 
 ## Evaluation
