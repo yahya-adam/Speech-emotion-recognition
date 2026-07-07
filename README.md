@@ -1,11 +1,13 @@
-# Speech Emotion Recognition (SER) – Hybrid CNN‑BiLSTM & wav2vec2
+# Speech Emotion Recognition (SER) – Hybrid CNN‑BiLSTM & wav2vec2 Pipeline
 
-This repository contains two deep learning pipelines for recognizing emotions from speech:
+## 🚀 Key Engineering Achievements
 
-1. **Hybrid CNN‑BiLSTM** – A lightweight model that combines convolutional layers for local feature extraction and bidirectional LSTM for temporal context.
-2. **wav2vec2** – A pretrained transformer model (from Hugging Face) fine‑tuned for emotion classification, achieving state‑of‑the‑art performance.
+* **Dual-Pathway Deep Learning Architecture:** Engineered a comparative deep learning framework featuring both a lightweight Hybrid CNN-BiLSTM for resource-constrained edge inference and a state-of-the-art wav2vec2 Transformer for maximum classification accuracy.
+* **Advanced Temporal Feature Extraction:** Implemented robust MFCC (Mel-Frequency Cepstral Coefficients) feature extraction pipelines with precise windowing (25ms) and hop lengths (10ms) to capture nuanced vocal tract characteristics from raw audio.
+* **State-of-the-Art Transformer Fine-Tuning:** Leveraged Hugging Face's `facebook/wav2vec2-base` pretrained model, applying advanced fine-tuning techniques (gradient accumulation, dynamic warmup ratios, and early stopping) to achieve SOTA performance on a 6-emotion dataset.
+* **Comprehensive Model Observability:** Developed automated logging and Excel-based reporting pipelines to track hyperparameter sweeps, loss curves, and classification metrics across 7,442 audio clips, ensuring full reproducibility and transparent model evaluation.
 
-Both models are trained and evaluated on a **6‑emotion dataset** (Angry, Disgust, Fear, Happy, Neutral, Sad) with **7,442 audio clips**.
+This project implements a dual-pipeline Speech Emotion Recognition (SER) system. It compares a lightweight, custom-built Hybrid CNN-BiLSTM model optimized for MFCC feature inputs against a fine-tuned wav2vec2 Transformer model. Both architectures are trained and evaluated on a comprehensive 6-emotion dataset (Angry, Disgust, Fear, Happy, Neutral, Sad) comprising 7,442 audio clips, providing a robust benchmark for both resource-constrained and high-accuracy deployment scenarios.
 
 ---
 
@@ -48,17 +50,17 @@ SER_Project/
 2. **Create a virtual environment** (Python 3.8+ recommended).
 3. **Install dependencies**:
 4. **Create requirements.txt file and copy these below libraries**
-
-- librosa==0.10.1
-- numpy==1.24.3
-- pandas==2.0.3
-- tensorflow==2.15.0
-- torch==2.1.0
-- transformers==4.35.0
-- scikit-learn==1.3.0
-- tqdm==4.66.1
-- openpyxl==3.1.2
-
+```text
+librosa==0.10.1\
+numpy==1.24.3\
+pandas==2.0.3\
+tensorflow==2.15.0\
+torch==2.1.0\
+transformers==4.35.0\
+scikit-learn==1.3.0\
+tqdm==4.66.1\
+openpyxl==3.1.2
+```
 ```bash
 pip install -r requirements.txt
 ```
@@ -71,33 +73,30 @@ Flat structure (files with emotion codes in filename):
 
 For the hybrid model, we extract MFCC features:
 
-   **Number of coefficients:**  39
-
-   **Window length:** 25 ms
-
-   **Hop length:** 10 ms
-
+   **Number of coefficients:**  39\
+   **Window length:** 25 ms\
+   **Hop length:** 10 ms\
    **Fixed audio length:** 200 samples (~2 seconds at 16kHz) – pad or truncate.
 
 ## Training the Hybrid Model
 
 The hybrid model is a **CNN‑BiLSTM** . Key hyperparameters:
-- Conv filters  ==	 39
-- Kernel size   ==   3
-- BiLSTM units  ==  384
-- Dropout	    ==  0.3
-- Batch size    ==  64
-- weight_decay = 1e-4   
-- Learning rate == 1e-3
-- Epochs	    ==  70
+ Conv filters  ==	 39\
+ Kernel size   ==   3\
+ BiLSTM units  ==  384\
+ Dropout	    ==  0.3\
+ Batch size    ==  64\
+ weight_decay = 1e-4\
+ learning rate == 1e-3\
+ Epochs	    ==  70
 
 ## Training wav2vec2
 
 We use the pretrained model facebook/wav2vec2-base from Hugging Face and fine‑tune it for emotion classification.
 
 ## Preparation
--   Raw audio (variable length) is used – wav2vec2 expects waveform tensors.
--   The dataset is split into train/validation (80/20) per fold (or use the same 10‑fold splits for fair comparison).
+  Raw audio (variable length) is used – wav2vec2 expects waveform tensors.\
+  dataset is split into train/validation (80/20) per fold (or use the same 10‑fold splits for fair comparison).
 
 Key hyperparameters:
 - Pretrained model == facebook/wav2vec2-base
