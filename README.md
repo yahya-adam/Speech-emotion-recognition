@@ -113,11 +113,9 @@ Key hyperparameters:
 
 The script outputs:
 
--   Fine‑tuned model weights.
-
--   Validation accuracy and loss curves.
-
--    Classification report
+-   Fine‑tuned model weights.\
+-   Validation accuracy and loss curves.\
+-   Classification report
 
 ## Evaluation
 
@@ -154,8 +152,7 @@ Both models are evaluated on the same test folds (or a held‑out test set). Met
 
    **Multimodal fusion** (audio + text + facial expressions).\
    **Cross‑lingual adaptation** using self‑supervised models.\
-   **Fairness evaluation** across age, gender, and accent groups.
-
-   **On‑device deployment** with quantisation and pruning.#
+   **Fairness evaluation** across age, gender, and accent groups.\
+   **On‑device deployment** with quantisation and pruning.
 
    
