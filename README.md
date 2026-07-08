@@ -28,7 +28,7 @@ This project implements a dual-pipeline Speech Emotion Recognition (SER) system.
 
 ## Project Structure
 SER_Project/\
-  ├── hybrid_model/
+  ├── hybrid_model/\
   │ ├── train_hybrid.py # Training script for CNN‑BiLSTM\
   │ └── utils.py # Feature extraction, data loading\
   ├── wav2vec2_model/\
